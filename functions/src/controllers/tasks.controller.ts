@@ -5,9 +5,9 @@ import {db} from "../firebase";
 export const getTasks = async (req: Request, res: Response) => {
   try {
     const snapshot = await db.collection("tasks")
-    .where("email", "==", req.body.user.email)
-    .orderBy('createdAt', 'desc')
-    .get();
+      .where("email", "==", req.body.user.email)
+      .orderBy("createdAt", "desc")
+      .get();
 
     const tareas = snapshot.docs.map((doc) => ({
       id: doc.id,
