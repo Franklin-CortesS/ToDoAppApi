@@ -3,4 +3,4 @@ import {getFirestore} from "firebase-admin/firestore";
 
 admin.initializeApp();
 
-export const db = getFirestore(admin.app(), "tasks");
+export const db = getFirestore(admin.app());

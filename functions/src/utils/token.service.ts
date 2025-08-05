@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import * as admin from "firebase-admin";
+import {db} from "../firebase";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 const JWT_EXPIRATION = "1h";
@@ -35,7 +36,6 @@ export function verifyToken(token: string): {email: string} {
  * token has been successfully revoked.
  */
 export async function revokeToken(token: string): Promise<void> {
-  const db = admin.firestore();
   await db.collection("tokenBlacklist").doc(token).set({
     revokedAt: admin.firestore.FieldValue.serverTimestamp(),
   });
@@ -49,7 +49,6 @@ export async function revokeToken(token: string): Promise<void> {
  * token is revoked (exists in the blacklist), otherwise `false`.
  */
 export async function isTokenRevoked(token: string): Promise<boolean> {
-  const db = admin.firestore();
   const doc = await db.collection("tokenBlacklist").doc(token).get();
   return doc.exists;
 }
