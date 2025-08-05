@@ -11,7 +11,7 @@ const loginSchema: JSONSchemaType<LoginInput> = {
       type: "string",
       format: "email",
       minLength: 5,
-      maxLength: 100
+      maxLength: 100,
     },
   },
   required: ["email"],
