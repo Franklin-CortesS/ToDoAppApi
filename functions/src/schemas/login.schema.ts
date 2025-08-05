@@ -11,9 +11,7 @@ const loginSchema: JSONSchemaType<LoginInput> = {
       type: "string",
       format: "email",
       minLength: 5,
-      maxLength: 100,
-      pattern:
-        "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      maxLength: 100
     },
   },
   required: ["email"],

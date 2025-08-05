@@ -1,7 +1,9 @@
 import {Request, Response, NextFunction} from "express";
 import Ajv, {JSONSchemaType} from "ajv";
+import addFormats from "ajv-formats";
 
 const ajv = new Ajv();
+addFormats(ajv);
 
 /**
  * Validates the schema of the given object.
