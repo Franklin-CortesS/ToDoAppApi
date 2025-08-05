@@ -12,6 +12,7 @@ import {onRequest} from "firebase-functions/https";
 // import * as logger from "firebase-functions/logger";
 import express from "express";
 import tareasRouter from "./routes/tasks.routes";
+import authRouter from "./routes/auth.routes";
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
@@ -37,5 +38,6 @@ setGlobalOptions({maxInstances: 10});
 const app = express();
 app.use(express.json());
 app.use("/tasks", tareasRouter);
+app.use("/auth", authRouter);
 
 export const api = onRequest(app);

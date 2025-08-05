@@ -2,9 +2,13 @@ import {Request, Response} from "express";
 import * as admin from "firebase-admin";
 import {db} from "../firebase";
 
-export const getTasks = async (_req: Request, res: Response) => {
+export const getTasks = async (req: Request, res: Response) => {
   try {
-    const snapshot = await db.collection("tasks").get();
+    const snapshot = await db.collection("tasks")
+    .where("email", "==", req.body.user.email)
+    .orderBy('createdAt', 'desc')
+    .get();
+
     const tareas = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -22,7 +26,7 @@ export const createTask = async (req: Request, res: Response) => {
     title,
     description,
     completed,
-    fechaCreacion: admin.firestore.Timestamp.now(),
+    createdAt: admin.firestore.Timestamp.now(),
   };
 
   try {

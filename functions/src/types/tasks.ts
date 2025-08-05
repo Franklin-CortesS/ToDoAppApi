@@ -3,5 +3,5 @@ export interface ITask {
   title: string;
   description: string;
   completed: boolean;
-  fechaCreacion?: string;
+  createdAt?: string;
 }
