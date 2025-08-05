@@ -33,7 +33,7 @@ export async function verifyAuthToken(
     if (revoked) return res.status(401).json({error: "Token revocado"});
 
     const payload = verifyToken(token);
-    req.body.user = payload;
+    req.headers.x_email = payload.email;
     return next();
   } catch (error) {
     return res.status(401).json({error: "Token inválido o expirado"});

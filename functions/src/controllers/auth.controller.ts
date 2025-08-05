@@ -15,10 +15,6 @@ import {generateToken, revokeToken} from "../utils/token.service";
 export function login(req: Request, res: Response) {
   const {email} = req.body;
 
-  if (!email || typeof email !== "string") {
-    return res.status(400).json({error: "Email inválido"});
-  }
-
   const token = generateToken(email);
   return res.status(200).json({token});
 }

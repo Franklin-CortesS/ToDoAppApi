@@ -4,7 +4,7 @@ import {
   createTask,
   deleteTask,
 } from "../controllers/tasks.controller";
-import validateSchema from "../middlewares/validateTaskSchema";
+import validateSchema from "../middlewares/validateSchemas";
 import taskSchema from "../schemas/task.schema";
 import {verifyAuthToken} from "../middlewares/validateToken";
 
