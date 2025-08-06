@@ -3,7 +3,7 @@ import * as admin from "firebase-admin";
 import {db} from "../firebase";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
-const JWT_EXPIRATION = "1h";
+const JWT_EXPIRATION = "10m";
 
 /**
  * Generates a JWT token containing the provided email as payload.
