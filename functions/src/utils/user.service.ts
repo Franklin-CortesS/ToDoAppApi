@@ -1,3 +1,4 @@
+import * as admin from "firebase-admin";
 import {db} from "../firebase";
 import {getUsernameFromEmail} from "./email.service";
 
@@ -10,9 +11,8 @@ import {getUsernameFromEmail} from "./email.service";
  * if the user exists, or `false` otherwise.
  */
 export async function userExists(email: string): Promise<boolean> {
-  const docRef = db.collection("users").doc(email);
-  const docSnap = await docRef.get();
-  return docSnap.exists;
+  const query = await db.collection("users").where("email", "==", email).limit(1).get();
+  return !query.empty;
 }
 
 /**
@@ -24,11 +24,11 @@ export async function userExists(email: string): Promise<boolean> {
  * has been saved.
  */
 export async function saveUser(email: string): Promise<void> {
-  const docRef = db.collection("users").doc(email);
   const username = getUsernameFromEmail(email);
-  await docRef.set({
+
+  await db.collection("users").add({
     email,
     username,
-    createdAt: new Date(),
+    createdAt: admin.firestore.Timestamp.now(),
   });
 }

@@ -36,8 +36,9 @@ export function verifyToken(token: string): {email: string} {
  * token has been successfully revoked.
  */
 export async function revokeToken(token: string): Promise<void> {
-  await db.collection("tokenBlacklist").doc(token).set({
-    revokedAt: admin.firestore.FieldValue.serverTimestamp(),
+  await db.collection("tokenBlacklist").add({
+    token,
+    revokedAt: admin.firestore.Timestamp.now(),
   });
 }
 
@@ -49,6 +50,6 @@ export async function revokeToken(token: string): Promise<void> {
  * token is revoked (exists in the blacklist), otherwise `false`.
  */
 export async function isTokenRevoked(token: string): Promise<boolean> {
-  const doc = await db.collection("tokenBlacklist").doc(token).get();
-  return doc.exists;
+  const query = await db.collection("tokenBlacklist").where("token", "==", token).limit(1).get();
+  return !query.empty;
 }
