@@ -23,7 +23,6 @@ export const getTasks = async (req: Request, res: Response) => {
 
     res.json(tareas);
   } catch (error) {
-    console.log("Error al obtener tareas:", error);
     res.status(500).json({error: "Error al obtener tareas"});
   }
 };
@@ -43,7 +42,6 @@ export const createTask = async (req: Request, res: Response) => {
     const docRef = await db.collection("tasks").add(newTask);
     res.status(201).json({id: docRef.id, ...newTask});
   } catch (error) {
-    console.error("Error al crear tarea:", error);
     res.status(500).json({error: "Error al crear tarea"});
   }
 };
@@ -68,7 +66,6 @@ export const updateTask = async (req: Request, res: Response) => {
 
     return res.status(200).json({message: "Tarea actualizada correctamente"});
   } catch (error) {
-    console.error("Error al actualizar tarea:", error);
     return res.status(500).json({error: "Error al actualizar tarea"});
   }
 };

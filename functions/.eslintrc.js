@@ -20,6 +20,8 @@ module.exports = {
   ignorePatterns: [
     "/lib/**/*", // Ignore built files.
     "/generated/**/*", // Ignore generated files.
+    "/coverage/**/*",
+    "jest.config.js",
   ],
   plugins: [
     "@typescript-eslint",
