@@ -6,6 +6,7 @@ export const getTasks = async (req: Request, res: Response) => {
   try {
     const snapshot = await db.collection("tasks")
       .where("email", "==", req.headers.x_email)
+      .where("completed", "==", false)
       .orderBy("createdAt", "desc")
       .get();
 
