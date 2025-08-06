@@ -11,7 +11,8 @@ import {getUsernameFromEmail} from "./email.service";
  * if the user exists, or `false` otherwise.
  */
 export async function userExists(email: string): Promise<boolean> {
-  const query = await db.collection("users").where("email", "==", email).limit(1).get();
+  const query = await db.collection("users")
+    .where("email", "==", email).limit(1).get();
   return !query.empty;
 }
 

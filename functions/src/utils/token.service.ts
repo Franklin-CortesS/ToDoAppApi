@@ -50,6 +50,7 @@ export async function revokeToken(token: string): Promise<void> {
  * token is revoked (exists in the blacklist), otherwise `false`.
  */
 export async function isTokenRevoked(token: string): Promise<boolean> {
-  const query = await db.collection("tokenBlacklist").where("token", "==", token).limit(1).get();
+  const query = await db.collection("tokenBlacklist")
+    .where("token", "==", token).limit(1).get();
   return !query.empty;
 }
