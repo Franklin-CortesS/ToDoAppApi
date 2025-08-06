@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import * as admin from "firebase-admin";
 import {db} from "../firebase";
+import {formatTimestamp} from "../utils/dates.service";
 
 export const getTasks = async (req: Request, res: Response) => {
   try {
@@ -9,11 +10,17 @@ export const getTasks = async (req: Request, res: Response) => {
       .where("completed", "==", false)
       .orderBy("createdAt", "desc")
       .get();
+    const tareas = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      const formattedCreatedAt = formatTimestamp(data.createdAt);
 
-    const tareas = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+      return {
+        id: doc.id,
+        createdAt: formattedCreatedAt,
+        ...data,
+      };
+    });
+
     res.json(tareas);
   } catch (error) {
     console.log("Error al obtener tareas:", error);
