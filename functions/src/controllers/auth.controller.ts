@@ -44,5 +44,5 @@ export async function logout(req: Request, res: Response) {
 
   const token = authHeader.split(" ")[1];
   await revokeToken(token);
-  return res.json({message: "Token revocado exitosamente"});
+  return res.status(200).json({message: "Token revocado exitosamente"});
 }

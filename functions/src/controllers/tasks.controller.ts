@@ -48,6 +48,31 @@ export const createTask = async (req: Request, res: Response) => {
   }
 };
 
+export const updateTask = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const {title, description, completed} = req.body;
+
+  try {
+    const docRef = db.collection("tasks").doc(id);
+
+    const doc = await docRef.get();
+    if (!doc.exists) {
+      return res.status(404).json({error: "Tarea no encontrada"});
+    }
+
+    await docRef.update({
+      title,
+      description,
+      completed,
+    });
+
+    return res.status(200).json({message: "Tarea actualizada correctamente"});
+  } catch (error) {
+    console.error("Error al actualizar tarea:", error);
+    return res.status(500).json({error: "Error al actualizar tarea"});
+  }
+};
+
 export const deleteTask = async (req: Request, res: Response) => {
   const {id} = req.params;
   try {

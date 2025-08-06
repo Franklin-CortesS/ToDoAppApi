@@ -3,7 +3,7 @@ import {JSONSchemaType} from "ajv";
 interface TaskInput {
   title: string;
   description: string;
-  completed?: boolean;
+  completed: boolean;
 }
 
 const taskSchema: JSONSchemaType<TaskInput> = {
@@ -11,9 +11,9 @@ const taskSchema: JSONSchemaType<TaskInput> = {
   properties: {
     title: {type: "string", minLength: 1, maxLength: 35},
     description: {type: "string", minLength: 1, maxLength: 100},
-    completed: {type: "boolean", nullable: true},
+    completed: {type: "boolean"},
   },
-  required: ["title", "description"],
+  required: ["title", "description", "completed"],
   additionalProperties: false,
 };
 

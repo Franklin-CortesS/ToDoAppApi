@@ -2,6 +2,7 @@ import {Router} from "express";
 import {
   getTasks,
   createTask,
+  updateTask,
   deleteTask,
 } from "../controllers/tasks.controller";
 import validateSchema from "../middlewares/validateSchemas";
@@ -13,6 +14,7 @@ router.use(verifyAuthToken);
 
 router.get("/", getTasks);
 router.post("/create", validateSchema(taskSchema), createTask);
+router.put("/update/:id", validateSchema(taskSchema), updateTask);
 router.delete("/delete/:id", deleteTask);
 
 export default router;
