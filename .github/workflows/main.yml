@@ -25,6 +25,7 @@ jobs:
 
       - name: Run tests with coverage check
         run: npm run test
+        working-directory: functions
 
       - name: Build TypeScript
         run: npm run build
