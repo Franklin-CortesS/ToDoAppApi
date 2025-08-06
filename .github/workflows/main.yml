@@ -27,6 +27,11 @@ jobs:
         run: npm run test
         working-directory: functions
 
+      - name: Clean coverage and tests folders
+        run: |
+          rm -rf coverage __tests__
+        working-directory: functions
+
       - name: Build TypeScript
         run: npm run build
         working-directory: functions
