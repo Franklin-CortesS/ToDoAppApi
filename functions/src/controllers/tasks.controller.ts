@@ -27,6 +27,7 @@ export const createTask = async (req: Request, res: Response) => {
     title,
     description,
     completed,
+    email: req.headers.x_email,
     createdAt: admin.firestore.Timestamp.now(),
   };
 
