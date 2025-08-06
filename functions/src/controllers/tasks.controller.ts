@@ -16,6 +16,7 @@ export const getTasks = async (req: Request, res: Response) => {
     }));
     res.json(tareas);
   } catch (error) {
+    console.log("Error al obtener tareas:", error);
     res.status(500).json({error: "Error al obtener tareas"});
   }
 };
