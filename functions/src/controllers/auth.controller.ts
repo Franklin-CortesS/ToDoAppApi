@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import {generateToken, revokeToken} from "../utils/token.service";
+import {userExists, saveUser} from "../utils/user.service";
 
 /**
  * Handles user login by validating the email and
@@ -12,11 +13,17 @@ import {generateToken, revokeToken} from "../utils/token.service";
  * the authentication token if the email is valid,
  * otherwise returns a 400 error with an appropriate message.
  */
-export function login(req: Request, res: Response) {
+export async function login(req: Request, res: Response) {
   const {email} = req.body;
 
+  const exists = await userExists(email);
+
+  if (!exists) {
+    await saveUser(email);
+  }
+
   const token = generateToken(email);
-  return res.status(200).json({token});
+  return res.status(200).json({token, exists});
 }
 
 /**
