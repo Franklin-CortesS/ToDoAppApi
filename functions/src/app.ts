@@ -6,11 +6,11 @@ import authRouter from "./routes/auth.routes";
 const app = express();
 const allowedOrigins = [
   "http://localhost:4200",
-  "https://todoapp-fcs2499.web.app"
+  "https://todoapp-fcs2499.web.app",
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
+  origin: function (origin, callback){
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
