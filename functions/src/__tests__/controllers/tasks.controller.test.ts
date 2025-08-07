@@ -56,12 +56,12 @@ describe("Tasks Controller", () => {
       expect(res.json).toHaveBeenCalledWith([
         {
           id: "1",
-          createdAt: "timestamp1",
+          createdAt: "formatted-timestamp",
           title: "Test",
         },
         {
           id: "2",
-          createdAt: "timestamp2",
+          createdAt: "formatted-timestamp",
           title: "Another",
         },
       ]);
@@ -97,7 +97,7 @@ describe("Tasks Controller", () => {
         description: "Desc",
         completed: false,
         email: "test@example.com",
-        createdAt: now,
+        createdAt: "formatted-timestamp",
       });
     });
 
