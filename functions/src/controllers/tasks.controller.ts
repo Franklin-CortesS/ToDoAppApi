@@ -16,8 +16,8 @@ export const getTasks = async (req: Request, res: Response) => {
 
       return {
         id: doc.id,
-        createdAt: formattedCreatedAt,
         ...data,
+        createdAt: formattedCreatedAt,
       };
     });
 
