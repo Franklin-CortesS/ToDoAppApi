@@ -43,7 +43,7 @@ export const createTask = async (req: Request, res: Response) => {
     res.status(201).json({
       id: docRef.id,
       ...newTask,
-      createdAt: formatTimestamp(newTask.createdAt)
+      createdAt: formatTimestamp(newTask.createdAt),
     });
   } catch (error) {
     res.status(500).json({error: "Error al crear tarea"});

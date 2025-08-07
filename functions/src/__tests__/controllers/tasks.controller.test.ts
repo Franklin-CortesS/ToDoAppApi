@@ -6,7 +6,6 @@ import {
 } from "../../controllers/tasks.controller";
 import {db} from "../../firebase";
 import * as admin from "firebase-admin";
-import {formatTimestamp} from "../../utils/dates.service";
 import {Request, Response} from "express";
 
 jest.mock("../../firebase", () => ({
